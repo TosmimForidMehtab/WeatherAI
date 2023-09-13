@@ -3,9 +3,9 @@ import audioToText as at
 import sys
 import random
 
-greeting = ['Hey, how can I help you?', 'What can I do for you?', 'What can I help you with?', 'What can I do for you?', 'How can I help you?']
+greeting = ['Hey, how can I help you?', 'hello, What can I do for you?', 'Hi, What can I help you with?', 'Hey What can I do for you?', 'Hello mate  How can I help you?']
 
-questions1 = ['For which city do you want to know the weather?', 'Provide the city name to know weather info', 'City name please', 'What can I help you with?', 'Please say the name of the city for which you want to know the weather']
+questions1 = ['For which city do you want to know the weather?', 'Provide the city name to know weather info', 'City name please', 'for which city can I help you with?', 'Please say the name of the city for which you want to know the weather']
 
 # Generate random number in the range of 0 to 4
 index = random.randint(0, len(greeting)-1)
