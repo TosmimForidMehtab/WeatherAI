@@ -24,4 +24,4 @@ def getWeather(city):
         return f"Failed to retrieve weather for {city}.Please try again later."
 
 if __name__ == '__main__':
-    print(getWeather('Mumbai'))
+    print(getWeather('Delhi'))
