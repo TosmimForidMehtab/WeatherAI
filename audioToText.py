@@ -4,16 +4,18 @@ import speech_recognition as sr
 def speechToText():
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        recognizer.adjust_for_ambient_noise(source, duration=1.1)
         print("Listening...")
         audio = recognizer.listen(source)
         print("Processing...")
 
         try:
             text = recognizer.recognize_google(audio)
-            return text
+            if text is not None:
+                text = text.lower()
+                return text
         except sr.UnknownValueError:
-            print("Sorry I could not understand the audio")
+            print('Sorry I could not understand the audio')
         except sr.RequestError:
             print("API unavailable or unresponsive")
 
