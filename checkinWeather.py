@@ -1,17 +1,27 @@
-from bs4 import BeautifulSoup
 import requests
+import config
 
+API_KEY = config.API_KEY
+BASE_URL = config.BASE_URL
 def getWeather(city):
-    url = "https://www.google.com/search?q=" + city + " weather"
-    html = requests.get(url).content
+    params = {
+        'q': city,
+        'appid': API_KEY,
+        "units": "metric",
+    }
 
-    soup = BeautifulSoup(html, 'html.parser')
-    temp = soup.find('div', attrs={'class': 'BNeawe iBp4i AP7Wnd'}).text
-    data = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text
+    response = requests.get(BASE_URL, params=params)
 
-    desc = data.split('\n')[1]
-    return desc
-
+    if response.status_code == 200:
+        data = response.json()
+        main = data['main']
+        weatherDesc = data['weather'][0]['description']
+        temp = main['temp']
+        humidity = main['humidity']
+        return f"The weather in {city} is currently {weatherDesc}. The temperature is {temp} degrees Celsius and the humidity is {humidity} percent." 
+    
+    else:
+        return f"Failed to retrieve weather for {city}.Please try again later."
 
 if __name__ == '__main__':
     print(getWeather('Mumbai'))
