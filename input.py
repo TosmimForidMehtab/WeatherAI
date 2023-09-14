@@ -33,19 +33,37 @@ engine.setProperty("rate", 150)
 wake = at.speechToText()
 
 # Convert text to lowercase
-if wake is not None:
-    wake = wake.lower()
+# if wake is not None:
+#     wake = wake.lower()
+# else:
+#     # exit the program
+#     sys.exit()
+while(wake is None):
+    speak("Sorry, i did not understand , please say it again")
+    wake = at.speechToText()
 else:
-    # exit the program
-    sys.exit()
+    wake = wake.lower()    
 
 
-if 'vortex' in wake:
+while('vortex' not in wake):
+    speak("Sorry, i did not understand , please say it again")
+    wake = at.speechToText()
+   
+  
+    
+else:
     speak(greeting[index])
     
     reply1 = at.speechToText()
     
-    if 'weather' in reply1:
+    while('weather' not in reply1):
+         speak("Sorry, i did not understand , please say it again")
+         wake = at.speechToText()
+        
+  
+           
+
+    else:
             speak(questions1[index])
 
             while(True):
@@ -68,11 +86,4 @@ if 'vortex' in wake:
                 # Asking the user to say "exit" or "stop" to exit or the city name of another city to get weather
                  
                 speak("Say 'exit' or 'stop' or 'quit' to exit the program or say the city name of another city to get the weather")
-
-    else:
-            speak("Sorry, i am unable to understand you")
-  
-    
-else:
-    engine.say('Sorry, I did not understand')
         
