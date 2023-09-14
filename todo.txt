@@ -1,3 +1,16 @@
+TO-DO
+
 1. Gujrati to english conversion
 2. Date feature ,to add
 3. convert to .exe file 
+
+
+***************
+Instruction
+
+
+1.Name of the AI is 'Vortex'
+
+2. Always say city name as last word
+
+3. use word 'exit' or 'stop' or 'quit' in your sentence to exit the program
