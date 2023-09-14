@@ -1,8 +1,9 @@
 TO-DO
 
 1. Gujrati to english conversion
-2. Date feature ,to add
-3. convert to .exe file 
+2. Add "how are you? " 
+3. Date feature ,to add
+4. convert to .exe file 
 
 
 ***************
