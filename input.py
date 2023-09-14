@@ -3,6 +3,7 @@ import audioToText as at
 import sys
 import random
 import checkinWeather as ciw
+import time 
 
 #========================Utility Functions Start====================================
 def speak(text):
@@ -42,41 +43,35 @@ else:
 if 'vortex' in wake:
     speak(greeting[index])
     
-    # print(reply1)  This is printing none
-   
-    flag=True
-    while(True):
-        if flag:
-             reply1 = at.speechToText()
-            
-       
-        if 'weather' in reply1:
+    reply1 = at.speechToText()
+    
+    if 'weather' in reply1:
             speak(questions1[index])
 
-            reply2=at.speechToText() #asking for city. Here if the user says exit
-            if(checkExit(reply2)):
-                speak("Thank you for using Vortex! Hope to meet you soon!,Bye!")
-                break
+            while(True):
+                reply2=at.speechToText() #asking for city. Here if the user says exit
+                
+                if(checkExit(reply2)):
+                    speak("Thank you for using Vortex! Hope to meet you soon!,Bye!")
+                    break
+                
+                
+                reply2Array=reply2.split() #checking for last word in string array
+                city=reply2Array[-1]
 
-            reply2Array=reply2.split() #checking for last word in string array
-            city=reply2Array[-1]
+                # Telling the weather
+                speak(ciw.getWeather(city))   
+                
+                #**should wait for 2 second here**#
+                time.sleep(2) 
+                
+                # Asking the user to say "exit" or "stop" to exit or the city name of another city to get weather
+                 
+                speak("Say 'exit' or 'stop' or 'quit' to exit the program or say the city name of another city to get the weather")
 
-            # Telling the weather
-            speak(ciw.getWeather(city))
-            
-            # Asking the user to say "exit" or "stop" to exit or the city name of another city to get weather
-            speak("Say 'exit' or 'stop' or 'quit' to exit the program or say the city name of another city to get the weather")
-            
-            ####checking for exit or if user want to use it again 
-            reply3=at.speechToText()#checking for exit/stop word or "weather"word to continue this
-            if 'exit' in reply3 or 'stop' in reply3:
-                break
-            elif 'weather' in reply3: #if user say "i want to know the weather of other place"
-                flag=False #so that reply1 will not be taken again
-            else:
-                engine.say("sorry, i am unable to understand, say it again")   
-        else:
-            engine.say("sorry, i am unable to understand, say it again")
+    else:
+            speak("Sorry, i am unable to understand you")
+  
     
 else:
     engine.say('Sorry, I did not understand')
