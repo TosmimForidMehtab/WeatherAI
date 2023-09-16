@@ -4,6 +4,19 @@ TO-DO
 2. Add "how are you? " 
 3. Date feature ,to add
 4. convert to .exe file (beta version)
+//As per the feedback of beta
+
+1. City name should be dynamic(i.e can be in any place of the sentence)
+
+2. add lots of weather synonyms/similar word like: temperature,rain,heat,hot,cool,cold,sunny,foggy,cloudy,rainy,haze and more that you can think
+
+3.Instead of saying "("Say 'exit' or 'stop' or 'quit' to exit the program or say the city name of another city to get the weather")" ,use ("do you want any other help?") or similar sentence
+and the user will say "thank you or no thanks" or similar word like this to exit .
+
+4. for date: instead of saying exact date, the user will say today,tomorrow,yesterday,next week,next month etc.
+
+
+5. Add navigation project also
 
 
 ***************
