@@ -13,18 +13,26 @@ def speak(text):
     engine.runAndWait()
 
 def checkExit(word):
-    if 'exit' in word or 'stop' in word or 'quit' in word:
+    if 'exit' in word or 'stop' in word or 'quit' in word or 'bye' in word or 'goodbye' in word or 'thanks' in word or 'thank you' in word:
         return True
     else:
         return False
 
+def checkWeatherSynonyms(words):
+    synonyms = ["weather", "snow", "winter", "cold", "hot", "rain", "sunny", "foggy", "cloudy", "rainy", "haze", "humidity", "temperature", "summer", "spring", "fall", "autumn", "raining", "snowing", "climate"]
+    words = words.split()
+    for word in words:
+        if word in synonyms:
+            return True
+    return False
 #========================Utility Functions End====================================
 
-#========================Constants Start==========================================
 def processor():
-    greeting = ['Hey, how can I help you?', 'hello, What can I do for you?', 'Hi, What can I help you with?', 'Hey What can I do for you?', 'Hello mate, How can I help you?']
+    greeting = ['Hey, how can I help you?', 'hello, What can I do for you?', 'Hi, What can I help you with?', 'Hey What can I do for you?', 'Hello boss, How can I help you?']
 
     questions1 = ['For which city do you want to know the weather?', 'Provide the city name to know weather info', 'City name please', 'for which city can I help you with?', 'Please say the name of the city for which you want to know the weather']
+
+    questions2 = ["How can I assist you?", "How can I help you again?", "What can I help you with?", "What can I assist you with?", "What do you want to query about?"]
 
     #========================Constants End============================================
 
@@ -38,7 +46,7 @@ def processor():
     # else:
     #     # exit the program
     #     sys.exit()
-    while(wake is None):
+    while(wake is None or 'vortex' not in wake):
         speak("Sorry, i did not understand, please say it again!")
         wake = at.speechToText()
         if(checkExit(wake)):
@@ -46,19 +54,19 @@ def processor():
             sys.exit()
 
 
-    while('vortex' not in wake):
-        speak("Sorry, i did not understand, please say it again!")
-        wake = at.speechToText()
-        if(checkExit(wake)):
-            speak("Thank you for using Vortex! Hope to meet you soon!,Bye!")
-            sys.exit()
+    # while():
+    #     speak("Sorry, i did not understand, please say it again!")
+    #     wake = at.speechToText()
+    #     if(checkExit(wake)):
+    #         speak("Thank you for using Vortex! Hope to meet you soon!,Bye!")
+    #         sys.exit()
     
     else:
         speak(greeting[index])
         
         reply1 = at.speechToText()
         
-        while('weather' not in reply1):
+        while(reply1 is not None and not checkWeatherSynonyms(reply1)):
             speak("Sorry, i did not understand, please say it again!")
             reply1 = at.speechToText()
             if(checkExit(reply1)):
@@ -82,10 +90,10 @@ def processor():
                     # Telling the weather
                     speak(ciw.getWeather(city))   
                     
-                    #**should wait for 2 second here**#
-                    time.sleep(1.2) 
+                    #**should wait for 1 second here**#
+                    time.sleep(1) 
                     
                     # Asking the user to say "exit" or "stop" to exit or the city name of another city to get weather
                     
-                    speak("Say 'exit' or 'stop' or 'quit' to exit the program or say the city name of another city to get the weather")
+                    speak(questions2[index])
             
